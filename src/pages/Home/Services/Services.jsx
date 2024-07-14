@@ -5,7 +5,8 @@ import { useState } from "react";
 
 const Services = () => {
     const [asc, setAsc] = useState(true);
-    const services = useServices(asc);
+    const [search, setSearch] = useState('');   
+    const services = useServices(asc, search);
   // const [services, setServices] = useState([]);
 
   // useEffect(() => {
@@ -13,6 +14,12 @@ const Services = () => {
   //         .then(res => res.json())
   //         .then(data => setServices(data));
   // }, [])
+  const handleSearch = e => {
+    e.preventDefault();
+    const searchText = e.target?.search?.value;
+    console.log(searchText)
+    setSearch(searchText);
+  }
 
   return (
     <div className="mt-4">
@@ -22,8 +29,12 @@ const Services = () => {
         <p>
           the majority have suffered alteration in some form, by injected
           humour, or randomised <br /> words which do not look even slightly
-          believable.{" "}
+          believable.
         </p>
+        <form onSubmit={handleSearch}>
+          <input type="text" name="search" id="" className="border border-black rounded-lg p-2 mt-2 mb-2"/>
+          <input type="submit" value="Search" className="btn -ml-2"/>
+        </form>
         <button
           className="btn btn-outline mt-4 mb-4"
           onClick={() => setAsc(!asc)}
